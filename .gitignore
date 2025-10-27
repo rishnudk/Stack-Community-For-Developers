@@ -1,0 +1,42 @@
+# Node modules
+node_modules/
+.pnpm-store/
+.pnp/
+.pnp.js
+
+# Build outputs
+dist/
+build/
+.next/
+out/
+turbo/
+.vercel/
+
+# Environment files
+.env
+.env.*
+
+# Logs
+*.log
+logs/
+
+# TypeScript
+*.tsbuildinfo
+
+# Prisma
+prisma/dev.db
+prisma/dev.db-journal
+
+# OS / Editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# Cache
+.cache/
+.turbo/
+
+# Coverage
+coverage/
+*.lcov
