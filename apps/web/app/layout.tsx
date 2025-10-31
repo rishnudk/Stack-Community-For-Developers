@@ -20,7 +20,7 @@ export default function RootLayout({
         <SessionProvider>
         <TrpcProvider>{children}</TrpcProvider>
         </SessionProvider>
-      </body>
+      </body> 
     </html>
   );
 }
