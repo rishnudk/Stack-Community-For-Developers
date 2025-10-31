@@ -13,5 +13,8 @@
   "devDependencies": {
     "turbo": "^2.5.8",
     "typescript": "^5.9.3"
+  },
+  "dependencies": {
+    "@prisma/client": "^6.18.0"
   }
 }

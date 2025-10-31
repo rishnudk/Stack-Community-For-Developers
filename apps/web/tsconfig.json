@@ -22,14 +22,14 @@
         "name": "next"
       }
     ],
-    "baseUrl": ".", // ✅ Added
+    "baseUrl": ".", 
     "paths": {
       "@/*": [
         "./src/*"
       ],
       "@api/*": [
         "../api/src/*"
-      ] // ✅ Added — maps backend src folder
+      ] 
     }
   },
   "include": [

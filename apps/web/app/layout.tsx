@@ -1,26 +1,17 @@
-// import './globals.css';
-import { TrpcProvider } from '../src/providers/TrpcProvider';
-import { SessionProvider } from "next-auth/react";
-import type { Metadata } from "next";
+import type { Metadata } from 'next';
+import ClientProviders from './providers/ClientProviders';
 
-
-export const metadata : Metadata  = {
+export const metadata: Metadata = {
   title: 'My App',
   description: 'Next.js + tRPC + Fastify',
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <body>
-        <SessionProvider>
-        <TrpcProvider>{children}</TrpcProvider>
-        </SessionProvider>
-      </body> 
+        <ClientProviders>{children}</ClientProviders>
+      </body>
     </html>
   );
 }
