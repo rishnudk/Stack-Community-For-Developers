@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import ClientProviders from './providers/ClientProviders';
+import { Toaster } from 'sonner';
 
 export const metadata: Metadata = {
   title: 'My App',
@@ -10,7 +11,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
       <body>
-        <ClientProviders>{children}</ClientProviders>
+        <ClientProviders>
+          {children}
+          <Toaster position="top-right" richColors />
+        </ClientProviders>
       </body>
     </html>
   );

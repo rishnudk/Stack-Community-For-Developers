@@ -2,16 +2,22 @@ import Fastify from 'fastify';
 import cors from '@fastify/cors';
 import { appRouter } from './trpc/router.ts';
 import { fastifyTRPCPlugin } from '@trpc/server/adapters/fastify';
+import { PrismaClient } from '@prisma/client';
+import { createContext } from './context.ts';
+import type { FastifyRequest, FastifyReply } from 'fastify';
+
+
+const prisma = new PrismaClient();
 
 const server = Fastify({ logger: true });
 
 // Parse JSON bodies
 server.addContentTypeParser('application/json', { parseAs: 'string' }, (req, body, done) => {
   try {
-    const json = body ? JSON.parse(body) : {};
+    const json = body ? JSON.parse(body as string) : {};
     done(null, json);
   } catch (err) {
-    done(err, undefined);
+    done(err as Error, undefined);
   }
 });
 
@@ -20,13 +26,18 @@ server.addHook('preHandler', async (request, reply) => {
 });
 
 async function start() {
-  await server.register(cors, { origin: '*' });
+  await server.register(cors, { 
+    origin: true, // Allow all origins (in production, specify your frontend URL)
+    credentials: true, // Allow cookies
+  });
 
   await server.register(fastifyTRPCPlugin, {
     prefix: '/trpc',
     trpcOptions: {
       router: appRouter,
-      createContext: () => ({}),
+      createContext: async (opts: { req: FastifyRequest; res: FastifyReply }) => {
+        return createContext(opts.req, opts.res);
+      },
     },
   });
 

@@ -29,7 +29,13 @@
       ],
       "@api/*": [
         "../api/src/*"
-      ] 
+      ],
+      "@repo/ui": [
+        "../../packages/ui"
+      ],
+      "@repo/ui/*": [
+        "../../packages/ui/*"
+      ]
     }
   },
   "include": [

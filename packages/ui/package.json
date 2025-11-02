@@ -1,0 +1,21 @@
+{
+  "name": "@repo/ui",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./index.ts",
+  "types": "./index.ts",
+  "exports": {
+    "./button": "./button.tsx",
+    "./card": "./card.tsx",
+    "./input": "./input.tsx",
+    "./textarea": "./textarea.tsx"
+  },
+  "dependencies": {
+    "react": "^19.2.0"
+  },
+  "devDependencies": {
+    "@types/react": "^19",
+    "typescript": "^5"
+  }
+}
+
