@@ -18,22 +18,14 @@ export const TrpcProvider = ({ children }: { children: React.ReactNode }) => {
     trpc.createClient({
       links: [
         httpBatchLink({
-          url: 'http://localhost:4000/trpc',
-          // Include cookies in requests so session can be read
+          // ✅ Use Next.js API route which has access to NextAuth session
+          url: '/api/trpc',
+          // ✅   Include cookies for NextAuth
           fetch(url, options) {
             return fetch(url, {
               ...options,
               credentials: 'include',
             });
-          },
-          headers() {
-            // Forward cookies to Fastify server
-            if (typeof window !== 'undefined') {
-              return {
-                cookie: document.cookie,
-              };
-            }
-            return {};
           },
         }),
       ],
