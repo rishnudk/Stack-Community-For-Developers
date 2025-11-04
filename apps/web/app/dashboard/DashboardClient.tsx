@@ -2,7 +2,7 @@
 
 import { signOut } from 'next-auth/react';
 import { CreatePost } from '../components/CreatePost';
-import { PostList } from '../components/PostList';
+import { PostsFeed } from '../components/PostsFeed';
 import { Button } from '@repo/ui/button';
 import Link from 'next/link';
 import type { Session } from 'next-auth';
@@ -57,7 +57,7 @@ export function DashboardClient({ session }: DashboardClientProps) {
       <CreatePost />
 
       {/* Posts List */}
-      <PostList />
+      <PostsFeed currentUserId={session.user?.id || ''} />
     </div>
   );
 }

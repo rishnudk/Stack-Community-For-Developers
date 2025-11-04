@@ -128,7 +128,7 @@ export const appRouter = t.router({
               image: true,
             },
           },
-          postLikes: {
+          likes: {
             select: {
               userId: true,
             },
