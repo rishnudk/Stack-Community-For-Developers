@@ -12,11 +12,11 @@ import Link from 'next/link';
 import type { Session } from 'next-auth';
 import { LogOut, User } from 'lucide-react';
 
-interface DashboardClientProps {
+interface FeedClientProps {
   session: Session;
 }
 
-export function DashboardClient({ session }: DashboardClientProps) {
+export function FeedClient({ session }: FeedClientProps) {
   const handleSignOut = async () => {
     await signOut({ callbackUrl: '/' });
   };

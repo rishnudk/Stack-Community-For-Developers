@@ -49,8 +49,8 @@ export function ProfileClient({ session }: ProfileClientProps) {
       <div className="bg-white rounded-lg shadow-md p-6 space-y-6">
         <div className="flex items-center justify-between">
           <h1 className="text-3xl font-bold">Profile Settings</h1>
-          <Link href="/dashboard">
-            <Button>Back to Dashboard</Button>
+          <Link href="/feed">
+            <Button>Back to Feed</Button>
           </Link>
         </div>
 
