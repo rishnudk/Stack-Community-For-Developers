@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import ClientProviders from './providers/ClientProviders';
 import { Toaster } from 'sonner';
-
+import '@/app/globals.css';
 export const metadata: Metadata = {
   title: 'My App',
   description: 'Next.js + tRPC + Fastify',

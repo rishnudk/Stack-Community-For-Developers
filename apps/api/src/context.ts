@@ -41,7 +41,7 @@ async function getSessionFromRequest(
     }
 
     if (!token) {
-      return null; 
+      return null;
     }
 
     // Decode the JWT token using NextAuth secret

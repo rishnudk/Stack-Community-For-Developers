@@ -18,9 +18,9 @@ export const TrpcProvider = ({ children }: { children: React.ReactNode }) => {
     trpc.createClient({
       links: [
         httpBatchLink({
-          // ✅ Use Next.js API route which has access to NextAuth session
+          // Use Next.js API route which has access to NextAuth session
           url: '/api/trpc',
-          // ✅   Include cookies for NextAuth
+          // Include cookies for NextAuth
           fetch(url, options) {
             return fetch(url, {
               ...options,

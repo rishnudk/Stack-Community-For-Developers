@@ -1,0 +1,11 @@
+{
+    "extends": "../../tsconfig.json",
+    "compilerOptions": {
+      "jsx": "react-jsx",
+      "allowJs": true,
+      "moduleResolution": "bundler",
+      "esModuleInterop": true,
+      "skipLibCheck": true
+    },
+    "include": ["./**/*.ts", "./**/*.tsx"]
+  }

@@ -23,6 +23,12 @@ export const CardTitle = ({ children, className = '' }: CardProps) => (
   </h2>
 );
 
+export const CardDescription = ({ children, className = '' }: CardProps) => (
+  <p className={`text-gray-600 ${className}`}>
+    {children}
+  </p>
+);
+
 export const CardContent = ({ children, className = '' }: CardProps) => (
   <div className={className}>
     {children}
