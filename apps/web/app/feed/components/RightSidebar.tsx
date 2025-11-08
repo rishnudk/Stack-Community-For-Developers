@@ -1,54 +1,98 @@
 'use client'
-import { Search } from 'lucide-react';
-import { Session } from 'next-auth';
-import { usePathname } from 'next/navigation';
- import React from 'react'
+
+import React from 'react'
+import type { Session } from 'next-auth'
+import { Search, Hash, UserPlus } from 'lucide-react'
+import { Card, CardContent } from '@repo/ui/card'
+import { Button } from '@repo/ui/button'
+import Link from 'next/link'
 
 interface RightSidebarProps {
-    session: Session;
+  session: Session
 }
- 
-const  RightSidebar =  ({ session} : RightSidebarProps) => {
-    const pathname = usePathname();
 
-    //Mock data
-    const trendingTopics = [
-        { tag: 'JavaScript', count: 100 },
-        { tag: 'React', count: 80 },
-        { tag: 'Next.js', count: 60 },
-        { tag: 'Tailwind', count: 40 },
-        { tag: 'TypeScript', count: 20 },
-    ]
+export default function RightSidebar({ session }: RightSidebarProps) {
+  // Mock data (replace with tRPC/Prisma later)
+  const trendingTopics = [
+    { tag: '#javascript', posts: 1324 },
+    { tag: '#react', posts: 982 },
+    { tag: '#nextjs', posts: 774 },
+    { tag: '#typescript', posts: 615 },
+    { tag: '#mongodb', posts: 430 },
+  ]
 
-    const followSuggetction = [
-        { name: 'John Doe', image: 'https://via.placeholder.com/150', isFollowing: false },
-        { name: 'Jane Smith', image: 'https://via.placeholder.com/150', isFollowing: false },
-        { name: 'Alice Johnson', image: 'https://via.placeholder.com/150', isFollowing: false },
-        { name: 'Bob Brown', image: 'https://via.placeholder.com/150', isFollowing: false },
-        { name: 'Charlie Davis', image: 'https://via.placeholder.com/150', isFollowing: false },
-        { name: 'Diana White', image: 'https://via.placeholder.com/150', isFollowing: false },
-        { name: 'Eve Green', image: 'https://via.placeholder.com/150', isFollowing: false },
-        { name: 'Frank Black', image: 'https://via.placeholder.com/150', isFollowing: false },
-    ]
+  const followSuggestions = [
+    { name: 'Alice Johnson', role: 'Frontend Developer' },
+    { name: 'John Smith', role: 'Full Stack Engineer' },
+    { name: 'Sarah Chen', role: 'UI/UX Designer' },
+  ]
 
-
-    
-   return (
-     <aside className='w-64 min-h-screen bg-white border-l border-gray-200 p-4 flex flex-col'>
-        <div>
-            {/* search box */}
-            <div className='relative mb-6'>
-
-                <Search className='absolute left-3 top-1/2 trasform '/>
-                <input type="text"
-                placeholder='Search posts or users'
-                className='w-full pl-10 pr-3 py-2 border border-gray-300' />
-            </div>
+  return (
+    <aside className="w-80 min-h-screen border-l border-gray-200 bg-white p-4 hidden lg:flex flex-col justify-between">
+      <div>
+        {/* 🔍 Search Box */}
+        <div className="relative mb-6">
+          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-500" />
+          <input
+            type="text"
+            placeholder="Search posts or users"
+            className="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
+          />
         </div>
-     </aside>
-   )
- }
 
- export default RightSidebar;
- 
- 
+        {/* 🔥 Trending Topics */}
+        <Card className="mb-6">
+          <CardContent className="p-4">
+            <h3 className="text-lg font-semibold mb-3 flex items-center gap-2">
+              <Hash className="w-4 h-4" /> Trending
+            </h3>
+            <ul className="space-y-2">
+              {trendingTopics.map((topic) => (
+                <li key={topic.tag} className="flex justify-between text-sm">
+                  <span className="text-gray-800 hover:text-blue-600 cursor-pointer">
+                    {topic.tag}
+                  </span>
+                  <span className="text-gray-500">{topic.posts} posts</span>
+                </li>
+              ))}
+            </ul>
+          </CardContent>
+        </Card>
+
+        {/* 👥 Follow Suggestions */}
+        <Card className="mb-6">
+          <CardContent className="p-4">
+            <h3 className="text-lg font-semibold mb-3 flex items-center gap-2">
+              <UserPlus className="w-4 h-4" /> Who to follow
+            </h3>
+            <ul className="space-y-3">
+              {followSuggestions.map((user) => (
+                <li
+                  key={user.name}
+                  className="flex items-center justify-between text-sm"
+                >
+                  <div>
+                    <p className="font-medium text-gray-900">{user.name}</p>
+                    <p className="text-xs text-gray-500">{user.role}</p>
+                  </div>
+                  <Button  variant="primary">
+                    Follow
+                  </Button>
+                </li>
+              ))}
+            </ul>
+          </CardContent>
+        </Card>
+      </div>
+
+      {/* ⚖️ Footer Links */}
+      <div className="text-xs text-gray-500 space-x-3 mt-6 flex flex-wrap justify-center border-t pt-4">
+        <Link href="/terms" className="hover:underline">Terms</Link>
+        <Link href="/privacy" className="hover:underline">Privacy</Link>
+        <Link href="/cookies" className="hover:underline">Cookies</Link>
+        <Link href="/about" className="hover:underline">About</Link>
+        <Link href="/contact" className="hover:underline">Contact</Link>
+      </div>
+    </aside>
+  )
+}
