@@ -10,6 +10,7 @@ import type { Session } from 'next-auth';
 import LeftSidebar from './components/LeftSidebar';
 import RightSidebar from './components/RightSidebar';
 import Navigation from './components/Navigation';
+import FeedBox from './components/FeedBox';
 
 interface FeedClientProps {
   session: Session;
@@ -20,14 +21,9 @@ export default function FeedClient({ session }: { session: any }) {
     <div className="flex min-h-screen bg-gray-50">
       <LeftSidebar session={session} />
 
-      <main className="flex-1 px-6 py-8 max-w-3xl mx-auto">
-        <Navigation
-          followingCount={128}
-          followersCount={342}
-          communityCount={5}
-        />
-        <CreatePostBox />
-        <PostList />
+      {/* 🧠 Center feed area */}
+      <main className="flex-1 flex justify-center px-6 py-8">
+        <FeedBox />
       </main>
 
       <RightSidebar session={session} />
