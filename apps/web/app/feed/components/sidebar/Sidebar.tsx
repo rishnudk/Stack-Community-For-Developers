@@ -1,11 +1,13 @@
-import React from 'react';
+import ProfileCard from "./ProfileCard";
+import AnalyticsCard from "./AnalyticCard";
+import ActionCard from "./ActionCard";
 
-const Sidebar = () => {
+export default function Sidebar() {
   return (
-    <div>
-      Sidebar
-    </div>
+    <aside className="w-72 bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden flex flex-col gap-3">
+      <ProfileCard />
+      <AnalyticsCard />
+      <ActionCard />
+    </aside>
   );
-};
-
-export default Sidebar;
+}
