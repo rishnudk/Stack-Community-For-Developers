@@ -18,6 +18,13 @@ model User {
   posts         Post[]
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt @default(now())
+   avatarUrl  String?
+  headline   String?  // job title / stack
+  location   String?
+  company    String?
+  isPremium  Boolean  @default(false)
+  views      View[]
+  impressions Impression[]
 }
 
 model Post {
@@ -65,4 +72,17 @@ model VerificationToken {
   expires    DateTime
 
   @@unique([identifier, token])
+}
+model View {
+  id       String   @id @default(cuid())
+  userId   String
+  createdAt DateTime @default(now())
+  user     User     @relation(fields: [userId], references: [id])
+}
+
+model Impression {
+  id       String   @id @default(cuid())
+  userId   String
+  createdAt DateTime @default(now())
+  user     User     @relation(fields: [userId], references: [id])
 }

@@ -8,6 +8,7 @@ import { Badge } from '@repo/ui/badge';
 import { Separator } from '@repo/ui/separator';
 import type { Session } from 'next-auth';
 import LeftSidebar from './components/LeftSidebar';
+import Sidebar from './components/sidebar/Sidebar';
 import RightSidebar from './components/RightSidebar';
 import Navigation from './components/Navigation';
 import FeedBox from './components/FeedBox';
@@ -19,7 +20,7 @@ interface FeedClientProps {
 export default function FeedClient({ session }: { session: any }) {
   return (
     <div className="flex min-h-screen bg-gray-50">
-      <LeftSidebar session={session} />
+      <Sidebar session={session} />
 
       {/* 🧠 Center feed area */}
       <main className="flex-1 flex justify-center px-6 py-8">
