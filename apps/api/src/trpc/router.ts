@@ -1,15 +1,15 @@
 import { initTRPC, TRPCError } from "@trpc/server";
+import { router, publicProcedure, mergeRouters } from "./trpc.ts";
 import { z } from "zod";
 import { PrismaClient } from "@prisma/client";
-import type { Context } from "../context";
-import { userRouter } from "./userRouter";
+import type { Context } from "../context.ts";
+import { userRouter } from "./userRouter.ts";
 
 const prisma = new PrismaClient();
 
 // ✅ create one tRPC instance shared across routers
 const t = initTRPC.context<Context>().create();
 
-const publicProcedure = t.procedure;
 
 // ✅ Protected procedure (for authenticated routes)
 const protectedProcedure = t.procedure.use(async ({ ctx, next }) => {
@@ -28,7 +28,7 @@ const protectedProcedure = t.procedure.use(async ({ ctx, next }) => {
 });
 
 // ✅ Main app router
-export const appRouter = t.router({
+export const baseRouter  = t.router({
   // ---------------- USERS ----------------
   getUsers: publicProcedure.query(async ({ ctx }) => {
     return await ctx.prisma.user.findMany();
@@ -155,6 +155,6 @@ export const appRouter = t.router({
     }),
 })
   // ✅ attach subrouters here (without semicolon!)
-  .merge("user.", userRouter);
+ export const appRouter = mergeRouters(baseRouter, t.router({ user: userRouter }));
 
 export type AppRouter = typeof appRouter;
