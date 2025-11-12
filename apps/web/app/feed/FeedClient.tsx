@@ -5,9 +5,10 @@ import { Avatar, AvatarFallback } from '@repo/ui/avatar';
 import { Badge } from '@repo/ui/badge';
 import { Separator } from '@repo/ui/separator';
 import type { Session } from 'next-auth';
-import {LeftSidebar} from './components/LeftSidebar/LeftSidebar';
-import RightSidebar from './components//RightSidebar';
-import {FeedBox} from './components/feedbox/FeedBox';
+
+import { LeftSidebar } from './components/LeftSidebar/LeftSidebar';
+import { RightSidebar } from './components/RightSidebar/RightSidebar';
+import { FeedBox } from './components/feedbox/FeedBox';
 
 interface FeedClientProps {
   session: Session;
@@ -15,15 +16,27 @@ interface FeedClientProps {
 
 export default function FeedClient({ session }: FeedClientProps) {
   return (
-    <div className="flex min-h-screen bg-gray-50">
+    <div className="flex justify-center min-h-screen bg-black text-black">
+  <div className="flex w-full max-w-7xl">
+    {/* Left Sidebar */}
+    <aside className="hidden lg:block w-[280px] p-4">
       <LeftSidebar session={session} />
+    </aside>
 
-      {/*  Center feed area */}
-      <main className="flex-1 flex justify-center px-6 py-8">
+    {/* Feed Section */}
+    <main className="flex-1 flex justify-center">
+      <div className="w-full max-w-[600px] px-4 py-0">
         <FeedBox />
-      </main>
+      </div>
+    </main>
 
+    {/* Right Sidebar */}
+    <aside className="hidden lg:block w-[320px] p-3">
       <RightSidebar session={session} />
-    </div>
-  )
+    </aside>
+  </div>
+</div>
+
+
+  );
 }

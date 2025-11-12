@@ -1,10 +1,18 @@
+"use client";
+import type { Session } from "next-auth";
 import ProfileCard from "./ProfileCard";
-import AnalyticsCard from "./AnalyticCard";
+import AnalyticsCard from "./AnalyticsCard";
 import ActionCard from "./ActionCard";
+import SidebarLogo from "./SidebarLogo";
 
-export  function Sidebar() {
+interface LeftSidebarProps {
+  session: Session;
+}
+
+export function LeftSidebar({ session }: LeftSidebarProps) {
   return (
-    <aside className="w-72 bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden flex flex-col gap-3">
+    <aside className="w-72 bg-black rounded-2xl flex flex-col gap-4">
+      <SidebarLogo />
       <ProfileCard />
       <AnalyticsCard />
       <ActionCard />

@@ -51,7 +51,7 @@ export function SuggestionsCard() {
 
             {/* Follow button */}
             <Button
-              size="sm"
+              
               className="bg-white text-black rounded-full hover:bg-neutral-200"
             >
               Follow
