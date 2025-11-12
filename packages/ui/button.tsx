@@ -17,10 +17,12 @@ export const Button: React.FC<ButtonProps> = ({
 }) => {
   const Comp = asChild ? Slot : "button";
   const baseClasses = "px-4 py-2 rounded font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed";
+  
   const variantClasses = {
     primary: "bg-blue-500 text-white hover:bg-blue-600",
     secondary: "bg-gray-500 text-white hover:bg-gray-600",
     danger: "bg-red-500 text-white hover:bg-red-600",
+    
   };
 
   return (
