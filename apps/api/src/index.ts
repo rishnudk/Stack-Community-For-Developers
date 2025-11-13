@@ -1,6 +1,6 @@
 import Fastify from 'fastify';
 import cors from '@fastify/cors';
-import { appRouter } from './trpc/router.ts';
+import { appRouter } from './trpc/routerolddd.ts';
 import { fastifyTRPCPlugin } from '@trpc/server/adapters/fastify';
 import { PrismaClient } from '@prisma/client';
 import { createContext } from './context.ts';

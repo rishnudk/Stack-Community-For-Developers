@@ -8,35 +8,40 @@ datasource db {
 }
 
 model User {
-  id            String    @id @default(cuid())
-  name          String? 
-  email         String?   @unique
-  emailVerified DateTime? 
+  id            String       @id @default(cuid())
+  name          String?
+  email         String?      @unique
+  emailVerified DateTime?
   image         String?
   accounts      Account[]
   sessions      Session[]
   posts         Post[]
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt @default(now())
-   avatarUrl  String?
-  headline   String?  // job title / stack
-  location   String?
-  company    String?
-  isPremium  Boolean  @default(false)
-  views      View[]
-  impressions Impression[]
+  comments      Comment[]
+  likes         Like[]
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @default(now()) @updatedAt
+  avatarUrl     String?
+  headline      String? // job title / stack
+  location      String?
+  company       String?
+  isPremium     Boolean      @default(false)
+  views         View[]
+  impressions   Impression[]
 }
 
 model Post {
-  id        String   @id @default(cuid())
-  title     String
+  id        String    @id @default(cuid())
   content   String
+  images    String[] // list of s3 URLs
   authorId  String
-  author    User     @relation(fields: [authorId], references: [id], onDelete: Cascade)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-}
+  author    User      @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  comments  Comment[]
+  likes     Like[]
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
 
+  @@index([createdAt]) // helps cursor pagination
+}
 
 model Account {
   id                String  @id @default(cuid())
@@ -73,16 +78,42 @@ model VerificationToken {
 
   @@unique([identifier, token])
 }
+
 model View {
-  id       String   @id @default(cuid())
-  userId   String
+  id        String   @id @default(cuid())
+  userId    String
   createdAt DateTime @default(now())
-  user     User     @relation(fields: [userId], references: [id])
+  user      User     @relation(fields: [userId], references: [id])
 }
 
 model Impression {
-  id       String   @id @default(cuid())
-  userId   String
+  id        String   @id @default(cuid())
+  userId    String
   createdAt DateTime @default(now())
-  user     User     @relation(fields: [userId], references: [id])
+  user      User     @relation(fields: [userId], references: [id])
+}
+
+model Comment {
+  id      String @id @default(cuid())
+  content String
+  postId  String
+  userId  String
+
+  post Post @relation(fields: [postId], references: [id], onDelete: Cascade)
+  user User @relation(fields: [userId], references: [id])
+
+  createdAt DateTime @default(now())
+}
+
+model Like {
+  id     String @id @default(cuid())
+  postId String
+  userId String
+
+  post Post @relation(fields: [postId], references: [id], onDelete: Cascade)
+  user User @relation(fields: [userId], references: [id])
+
+  createdAt DateTime @default(now())
+
+  @@unique([postId, userId]) // one like per user per post
 }

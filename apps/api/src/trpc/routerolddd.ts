@@ -3,7 +3,7 @@ import { router, publicProcedure, mergeRouters } from "./trpc.ts";
 import { z } from "zod";
 import { PrismaClient } from "@prisma/client";
 import type { Context } from "../context.ts";
-import { userRouter } from "./userRouter.ts";
+import { userRouter } from "./routers/userRouter.ts";
 
 const prisma = new PrismaClient();
 

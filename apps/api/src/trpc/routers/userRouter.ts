@@ -1,6 +1,6 @@
 import { z } from "zod";
 import { initTRPC } from "@trpc/server";
-import type { Context } from "../context.ts";
+import type { Context } from "../../context.ts";
 
 const t = initTRPC.context<Context>().create();
 
