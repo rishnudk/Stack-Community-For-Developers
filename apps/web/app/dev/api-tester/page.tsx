@@ -42,7 +42,8 @@ export default function ApiTester() {
       const parsed = input ? JSON.parse(input) : {};
 
       const path = `${selectedRouter}.${selectedMethod}`;
-      const isMutation = routerTypes[selectedRouter][selectedMethod] === "mutation";
+const method = selectedMethod as keyof typeof routerTypes[typeof selectedRouter];
+const isMutation = routerTypes[selectedRouter][method] === "mutation";
 
       let url = `/api/trpc/${path}`;
 
