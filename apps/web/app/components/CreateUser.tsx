@@ -13,7 +13,7 @@ export default function CreateUser() {
       setName('');
       setEmail('');
     },
-    onError: (error) => {
+    onError: (error) => { 
       alert(`❌ Error: ${error.message}`);
     },
   });
